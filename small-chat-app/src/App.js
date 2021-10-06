@@ -3,6 +3,8 @@ import Navbar from './components/Navbar';
 import MessageList from './components/MessageList';
 import MessageInput from './components/MessageInput';
 import { useState } from 'react';
+import { useEffect } from 'react';
+
 
 const DUMMY_DATA = [
     {
@@ -19,14 +21,16 @@ const App = () => {
 
     const [messages, setMessages] = useState([]);
 
-    setMessages(DUMMY_DATA);
-    
+    useEffect(() => {
+        setMessages(DUMMY_DATA)
+    }, []);
+
     return ( 
         <div className = "App" >
         
         <Navbar />
         
-        <MessageList messages={messages} />
+        <MessageList messageList={messages} />
         
         <MessageInput />
         </div>
