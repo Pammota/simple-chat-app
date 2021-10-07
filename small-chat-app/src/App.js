@@ -32,7 +32,7 @@ const App = () => {
         <div className = "App" >
           <header>
 
-           <div className="f2 f1-l fw2 white-90 mb0 lh-title"> <img src="https://img.icons8.com/color/48/000000/chat--v1.png"/>BofanChat</div>
+           <div className="f2 f1-l fw2 white-90 mb0 lh-title"> <img alt="logo" className="logo-img" src="https://img.icons8.com/color/48/000000/chat--v1.png"/>BofanChat</div>
             <SignOut />
           </header>
 
@@ -53,15 +53,15 @@ const SignIn = () => {
 
     return(
         <>
-        <button onClick={signInWithGoogle}>Sign in with Google</button>
-        <p>Do not violate the guidelines or you will be banned!</p>
+        <button className="f2 f1-l fw2 white-90 mb0 lh-title sign-in" onClick={signInWithGoogle}>Sign in with Google</button>
+        <p className="p2">Do not violate the guidelines or you will be banned!</p>
         </>
     );
 }
 
 const SignOut = () => {
     return auth.currentUser && (
-        <button className="sign-out" onClick={()=>auth.signOut()}> Sign Out </button>
+       <div className="button-margin"> <button className="sign-out" onClick={()=>auth.signOut()}> Sign Out </button></div>
     );
 }
 
@@ -92,9 +92,7 @@ const ChatRoom = () =>{
         dummy.current.scrollIntoView({behaviour:'smooth'});
     }
 
-    useEffect( () => {
-        dummy.current.scrollIntoView({behaviour:'smooth'});
-    }, [sendMessage]);
+   
 
 
     return (
@@ -107,23 +105,27 @@ const ChatRoom = () =>{
         </main>
 
         <form onSubmit={sendMessage}>
-            <input value={formValue} onChange={(event)=> setFormValue(event.target.value)} placeholder=".  .  ."/>
-            <button type="submit">SEND</button>
+            <input value={formValue} onChange={(event)=> setFormValue(event.target.value)} placeholder=". . ."/>
+            <button type="submit">Send</button>
         </form>
+        
         </>
     );
 }
 
 const ChatMessage = (props) =>{
 
-    const {text, uid, photoURL} = props.message;
+    const {text, uid, photoURL,createdAt} = props.message;
 
     const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
 
     return(
     <div className={`message ${messageClass}`}>
         <img alt="profilePic" src={photoURL ? photoURL :'https://robohash.org/'+uid}/>
-        <p>{text}</p>
+        <div className="message-pair">
+            <p>{text}</p>
+            <p className="p3">{createdAt.toDate().toDateString()}</p>
+        </div>
     </div>
     );
 }

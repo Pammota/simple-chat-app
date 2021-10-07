@@ -4,7 +4,7 @@ body {
 
 .App {
   text-align: center;
-  max-width: 728px;
+  max-width: 2000px;
   margin: 0 auto;
 }
 
@@ -15,7 +15,7 @@ body {
   color: white;
   position: fixed;
   width: 100%;
-  max-width: 728px;
+  max-width: 2000px;
   top: 0;
   display: flex;
   align-items: center;
@@ -55,19 +55,19 @@ main::-webkit-scrollbar-thumb {
 }
 
 form {
-  height: 10vh;
+  height: 3.5rem;
   position: fixed;
   bottom: 0;
   background-color: rgb(24, 23, 23);
   width: 100%;
-  max-width: 728px;
+  max-width: 2000px;
   display: flex;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 form button {
   width: 20%;
-  background-color: rgb(56, 56, 143);
+  background-color: rgb(36, 80, 161);
 }
 
 
@@ -83,7 +83,7 @@ input {
 }
 
 button {
-  background-color: #282c34; /* Green */
+  background-color: rgb(36, 80, 161); /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -91,7 +91,7 @@ button {
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
-  font-size: 1.25rem;
+  font-size: 0.75rem;
 }
 
 button:disabled {
@@ -101,13 +101,18 @@ button:disabled {
 
 
 .sign-in {
-  color: #282c34;
-  background: white;
-  max-width: 400px;
+  color: #ffffff;
+  background: rgb(17, 60, 95);
+  max-width: 500px;
   margin: 0 auto;
 }
 
-
+.sign-out {
+  color: #ffffff;
+  background: rgb(17, 60, 95);
+  max-width: 400px;
+  
+}
 
 
 ul, li {
@@ -117,13 +122,34 @@ ul, li {
 
 p {
   max-width: 500px;
-  margin-bottom: 12px;
+  margin-bottom: 0px;
   line-height: 24px;
   padding: 10px 20px;
   border-radius: 25px;
   position: relative;
   color: white;
   text-align: center;
+}
+
+.p2 {
+  margin-bottom: 12px;
+  line-height: 24px;
+  padding: 20px 20px;
+  border-radius: 25px;
+  color: white;
+  text-align: center;
+}
+
+.p3 {
+  font-size: 70%;
+  margin-bottom: 2px;
+  margin-top:0px;
+  line-height: 10px;
+  padding: 4px 4px;
+  border-radius: 15px 15px 25px 25px !important;
+  color: white !important;
+  text-align: center;
+  background-color: #474350 !important;
 }
 
 .message {
@@ -140,10 +166,12 @@ p {
   color: white;
   background: #0b93f6;
   align-self: flex-end;
+  border-radius: 25px 25px 10px 25px;
 }
 .received p {
   background: #e5e5ea;
   color: black;
+  border-radius: 10px 25px 25px 25px;
 }
 
 img {
@@ -151,4 +179,29 @@ img {
   height: 40px;
   border-radius: 50%;
   margin: 2px 5px;
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0;
+  width: 100%;
+}
+
+.message-pair {
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+}
+
+.logo-img {
+  vertical-align: middle;
+  margin-bottom: 3px;
+}
+
+.button-margin {
+  margin:10px;
+}
+
+.sign-out {
+  border-radius: 15px;
 }
