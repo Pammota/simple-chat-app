@@ -1,9 +1,12 @@
 import './App.css';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import 'tachyons';
+
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import 'firebase/analytics';
+
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData} from 'react-firebase-hooks/firestore';
 
@@ -19,16 +22,18 @@ firebase.initializeApp({
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
-
-const [user] = useAuthState();//if not signed in, user = null, else, object with attributes
+const analytics = firebase.analytics();
 
 const App = () => {
 
-    
+    const [user] = useAuthState(auth);//if not signed in, user = null, else, object with attributes
+
     return ( 
         <div className = "App" >
           <header>
 
+           <div className="f2 f1-l fw2 white-90 mb0 lh-title"> <img src="https://img.icons8.com/color/48/000000/chat--v1.png"/>BofanChat</div>
+            <SignOut />
           </header>
 
           <section>
@@ -47,17 +52,22 @@ const SignIn = () => {
     } 
 
     return(
+        <>
         <button onClick={signInWithGoogle}>Sign in with Google</button>
+        <p>Do not violate the guidelines or you will be banned!</p>
+        </>
     );
 }
 
 const SignOut = () => {
     return auth.currentUser && (
-        <button onClick={()=>auth.signOut()}> Sign Out </button>
+        <button className="sign-out" onClick={()=>auth.signOut()}> Sign Out </button>
     );
 }
 
 const ChatRoom = () =>{
+
+    const dummy = useRef();
     const messageRef = firestore.collection('messages');
     const query = messageRef.orderBy('createdAt').limit(25);
 
@@ -65,14 +75,39 @@ const ChatRoom = () =>{
 
     const [formValue,setFormValue] = useState('');
 
+    const sendMessage = async(event) => {
+        event.preventDefault();
+
+        const {uid, photoURL} = auth.currentUser;
+
+        await messageRef.add({
+            text:formValue,
+            createdAt:firebase.firestore.FieldValue.serverTimestamp(),
+            uid,
+            photoURL
+        });
+
+        setFormValue('');
+
+        dummy.current.scrollIntoView({behaviour:'smooth'});
+    }
+
+    useEffect( () => {
+        dummy.current.scrollIntoView({behaviour:'smooth'});
+    }, [sendMessage]);
+
+
     return (
         <>
+        <main>
         <div>
             {messages && messages.map(msg => <ChatMessage key = {msg.id} message={msg}/>)}
         </div>
+        <div ref={dummy}></div>
+        </main>
 
-        <form>
-            <input />
+        <form onSubmit={sendMessage}>
+            <input value={formValue} onChange={(event)=> setFormValue(event.target.value)} placeholder=".  .  ."/>
             <button type="submit">SEND</button>
         </form>
         </>
@@ -81,13 +116,13 @@ const ChatRoom = () =>{
 
 const ChatMessage = (props) =>{
 
-    const {text, uid} = props.message;
+    const {text, uid, photoURL} = props.message;
 
-    const messageClass = uid === auth.currentUser.uid? 'sent': 'recieved';
+    const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
 
     return(
     <div className={`message ${messageClass}`}>
-        <img src={photoURL} />
+        <img alt="profilePic" src={photoURL ? photoURL :'https://robohash.org/'+uid}/>
         <p>{text}</p>
     </div>
     );
