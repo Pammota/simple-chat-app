@@ -92,7 +92,10 @@ const ChatRoom = () =>{
         dummy.current.scrollIntoView({behaviour:'smooth'});
     }
 
-   
+   useEffect( ()=>{
+    dummy.current.scrollIntoView({behaviour:'smooth'});
+   }
+   ,[messages]);
 
 
     return (
@@ -124,7 +127,7 @@ const ChatMessage = (props) =>{
         <img alt="profilePic" src={photoURL ? photoURL :'https://robohash.org/'+uid}/>
         <div className="message-pair">
             <p>{text}</p>
-            <p className="p3">{createdAt.toDate().toDateString()}</p>
+            <p className="p3">{createdAt ? createdAt.toDate().toDateString() : 'loading...'}</p>
         </div>
     </div>
     );
