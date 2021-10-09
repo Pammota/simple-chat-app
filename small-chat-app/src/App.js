@@ -32,7 +32,12 @@ const App = () => {
         <div className = "App" >
           <header>
 
-           <div className="f2 f1-l fw2 white-90 mb0 lh-title"> <img alt="logo" className="logo-img" src="https://img.icons8.com/color/48/000000/chat--v1.png"/>BofanChat</div>
+           <div className="f2 f1-l fw2 white-90 mb0 lh-title">
+                <div className="logo-banner-pair">
+                    <img alt="logo" className="logo-img" src="https://img.icons8.com/color/48/000000/chat--v1.png"/>
+                    <div className="app-banner">BofanChat</div>
+                </div>
+            </div>
             <SignOut />
           </header>
 
@@ -54,7 +59,7 @@ const SignIn = () => {
     return(
         <>
         <button className="f2 f1-l fw2 white-90 mb0 lh-title sign-in" onClick={signInWithGoogle}>Sign in with Google</button>
-        <p className="p2">Do not violate the guidelines or you will be banned!</p>
+        <p className="p2 center">Do not violate the guidelines or you will be banned!</p>
         </>
     );
 }
