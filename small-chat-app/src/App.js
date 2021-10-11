@@ -35,7 +35,7 @@ const App = () => {
            <div className="f2 f1-l fw2 white-90 mb0 lh-title">
                 <div className="logo-banner-pair">
                     <img alt="logo" className="logo-img" src="https://img.icons8.com/color/48/000000/chat--v1.png"/>
-                    <div className="app-banner">BofanChat</div>
+                    <div className="app-banner">BogdanChat Lite</div>
                 </div>
             </div>
             <SignOut />
