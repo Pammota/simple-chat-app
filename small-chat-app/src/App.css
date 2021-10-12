@@ -165,12 +165,15 @@ p {
     background: #0b93f6;
     align-self: flex-end;
     border-radius: 25px 25px 10px 25px;
+    word-break: break-word;
 }
 
 .received p {
     background: #e5e5ea;
     color: black;
     border-radius: 10px 25px 25px 25px;
+    word-break: break-word;
+    align-self: flex-start;
 }
 
 img {
@@ -204,9 +207,14 @@ img {
 
 .sign-out {
     border-radius: 15px;
+    font-size: 1rem;
 }
 
 .logo-banner-pair {
     display: flex;
     flex-direction: row;
+}
+
+.send-button {
+   font-size: 1.6rem !important;
 }

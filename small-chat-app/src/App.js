@@ -74,7 +74,7 @@ const ChatRoom = () =>{
 
     const dummy = useRef();
     const messageRef = firestore.collection('messages');
-    const query = messageRef.orderBy('createdAt').limit(25);
+    const query = messageRef.orderBy('createdAt').limit(10000);
 
     const [messages] = useCollectionData(query,{idField:'id'});
 
@@ -85,12 +85,16 @@ const ChatRoom = () =>{
 
         const {uid, photoURL} = auth.currentUser;
 
-        await messageRef.add({
-            text:formValue,
-            createdAt:firebase.firestore.FieldValue.serverTimestamp(),
-            uid,
-            photoURL
-        });
+
+        if(!formValue || /^\s*$/.test(formValue))
+            setFormValue('');
+        else
+            await messageRef.add({
+                text:formValue,
+                createdAt:firebase.firestore.FieldValue.serverTimestamp(),
+                uid,
+                photoURL
+            });
 
         setFormValue('');
 
@@ -113,8 +117,8 @@ const ChatRoom = () =>{
         </main>
 
         <form onSubmit={sendMessage}>
-            <input value={formValue} onChange={(event)=> setFormValue(event.target.value)} placeholder=". . ."/>
-            <button type="submit">Send</button>
+            <input value={formValue} onChange={(event)=>setFormValue(event.target.value)} placeholder=". . ."/>
+            <button type="submit" className="send-button">Send</button>
         </form>
         
         </>
